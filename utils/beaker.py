@@ -1,4 +1,3 @@
-
 class Beaker:
     def __init__(self, capacity=5, content=None):
         self.content = content if content else []
@@ -37,11 +36,11 @@ class Beaker:
     def pour_to(self, target):
         if not isinstance(target, Beaker):
             print("Target is not a Beaker")
-            return
+            return False
 
         remain = self.remove()
-        if not remain: return
+        if not remain: return False
         completed = target.add(remain)
         if not completed:
             self.add(remain)
-
+        return True
