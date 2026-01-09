@@ -44,3 +44,21 @@ class Beaker:
         if not completed:
             self.add(remain)
         return True
+
+def check_game(game_state):
+    end_state = True
+
+    for beaker in game_state:
+        if not check_beaker(beaker):
+            end_state = False
+            break
+    return end_state
+
+def check_beaker(beaker):
+    completed = True
+    if not beaker.content: return completed
+    for i in range(len(beaker.content[1:])):
+        if beaker.content[i] != beaker.content[i-1]:
+            completed = False
+            break
+    return completed
