@@ -46,6 +46,11 @@ class Beaker:
         return True
 
 def check_game(game_state):
+    """
+    Checks if a game as reached a win state.
+    :param game_state: A game state, a list of Beaker objects
+    :return: True if the game is reached a win state, False otherwise
+    """
     end_state = True
 
     for beaker in game_state:
@@ -62,3 +67,20 @@ def check_beaker(beaker):
             completed = False
             break
     return completed
+
+def check_action(game_state, action):
+    """
+    Does all the checks performed in the pour_to() method, but without performing the action
+    :param game_state: A game state, a list of Beaker objects
+    :param action: A tuple (idx_from, idx_to) that pour the liquid from a beaker to another beaker
+    :return: True if the action is valid, False otherwise
+    """
+    from_beaker = game_state[action[0]]
+    to_beaker = game_state[action[1]]
+
+    if ((not from_beaker.content) or
+            (len(to_beaker + from_beaker) > to_beaker.capacity) or
+            (to_beaker.content and from_beaker.content[-1] != to_beaker.content[-1])):
+        return False
+
+    return True
