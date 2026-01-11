@@ -13,7 +13,12 @@ class Node:
         return self.cost < other.cost
 
     def __str__(self):
-        return str([str(beaker) for beaker in self.state])
+        if self.parent:
+            return "(from, to)=" + str((str(self.parent.state[self.action[0]]), str(self.parent.state[self.action[1]]))) + " | " +\
+        str([str(beaker) for beaker in self.state]) + " \tcost: " + str(self.cost) + " | heuristic: " + str(self.heuristic())
+        else:
+            return str([str(beaker) for beaker in self.state]) + " \tcost: " + str(self.cost) + " | heuristic: " + str(self.heuristic())
+        return
 
     def heuristic(self):
         color_distribution = {} # numer of beakers a color has been found in for each color

@@ -17,6 +17,7 @@ def a_star(problem):
         explored.add(tuple(beaker.to_tuple() for beaker in current.state))
         for a in current.generate_actions():
             new = Node(current.generate_state(a), current, a)
+            print("New state generated:", new)
             if (tuple(beaker.to_tuple() for beaker in new.state) not in explored
                     and new.state not in [couple[1].state for couple in frontier]):
                 heapq.heappush(frontier, (new.eval, new))
@@ -41,13 +42,24 @@ def handle_duplicates(new, frontier) -> None:
 
 if __name__ == '__main__':
     initial_state = [
-        Beaker(capacity=2, content=[0, 1]),
-        Beaker(capacity=2, content=[1, 0]),
-        Beaker(capacity=2, content=[])
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[3, 0, 1, 2]),
+        Beaker(capacity=4, content=[2, 3, 0, 1]),
+        Beaker(capacity=4, content=[1, 2, 3, 0]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
     ]
 
     solution = a_star(initial_state)
+    print()
 
     for i in range(len(solution)):
-        print("Stato ", i + 1, ": ", solution[i])
+        print("State ", i + 1, ": ", solution[i])
 
+""" VARIOUS STARTING STATE
+Beaker(capacity=2, content=[0, 1]),
+        Beaker(capacity=2, content=[1, 0]),
+        Beaker(capacity=2, content=[])
+        
+        
+"""
