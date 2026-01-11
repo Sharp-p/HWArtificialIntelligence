@@ -42,10 +42,13 @@ def handle_duplicates(new, frontier) -> None:
 
 if __name__ == '__main__':
     initial_state = [
-        Beaker(capacity=4, content=[0, 1, 2, 3]),
-        Beaker(capacity=4, content=[3, 0, 1, 2]),
-        Beaker(capacity=4, content=[2, 3, 0, 1]),
-        Beaker(capacity=4, content=[1, 2, 3, 0]),
+        Beaker(capacity=4, content=[0, 0, 1, 2]),
+        Beaker(capacity=4, content=[3, 2, 4, 5]),
+        Beaker(capacity=4, content=[0, 5, 6, 6]),
+        Beaker(capacity=4, content=[5, 6, 0, 4]),
+        Beaker(capacity=4, content=[1, 3, 6, 3]),
+        Beaker(capacity=4, content=[5, 1, 1, 3]),
+        Beaker(capacity=4, content=[2, 2, 4, 4]),
         Beaker(capacity=4, content=[]),
         Beaker(capacity=4, content=[])
     ]
@@ -57,9 +60,73 @@ if __name__ == '__main__':
         print("State ", i + 1, ": ", solution[i])
 
 """ VARIOUS STARTING STATE
-Beaker(capacity=2, content=[0, 1]),
+============= EASY STARTING STATES =======================
+        Beaker(capacity=2, content=[0, 1]),
         Beaker(capacity=2, content=[1, 0]),
         Beaker(capacity=2, content=[])
         
+........................................................................
+
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[3, 0, 1, 2]),
+        Beaker(capacity=4, content=[2, 3, 0, 1]),
+        Beaker(capacity=4, content=[1, 2, 3, 0]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
+        
+============= DOABLE STARTING STATES ======================================
+        
+        Beaker(capacity=4, content=[0, 1, 1, 0]),
+        Beaker(capacity=4, content=[2, 2, 1, 3]),
+        Beaker(capacity=4, content=[4, 1, 0, 3]),
+        Beaker(capacity=4, content=[2, 5, 4, 4]),
+        Beaker(capacity=4, content=[5, 3, 4, 3]),
+        Beaker(capacity=4, content=[0, 2, 5, 5]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
+        
+.............................................................................
+
+        Beaker(capacity=4, content=[0, 0, 1, 2]),
+        Beaker(capacity=4, content=[3, 2, 4, 5]),
+        Beaker(capacity=4, content=[0, 5, 6, 6]),
+        Beaker(capacity=4, content=[5, 6, 0, 4]),
+        Beaker(capacity=4, content=[1, 3, 6, 3]),
+        Beaker(capacity=4, content=[5, 1, 1, 3]),
+        Beaker(capacity=4, content=[2, 2, 4, 4]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
+
+============= STATE SPACE EXPLODES (many duplicates at greater depths, longer execution, initial configuration dependant) ======================================
+
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[1, 0, 4, 1]),
+        Beaker(capacity=4, content=[0, 3, 0, 2]),
+        Beaker(capacity=4, content=[4, 3, 1, 4]),
+        Beaker(capacity=4, content=[2, 4, 3, 2]),
+        Beaker(capacity=4, content=[]),       
+        Beaker(capacity=4, content=[])
+        
+...........................................................
+        
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[0, 2, 4, 2]),
+        Beaker(capacity=4, content=[1, 5, 5, 4]),
+        Beaker(capacity=4, content=[0, 1, 3, 4]),
+        Beaker(capacity=4, content=[4, 3, 5, 5]),
+        Beaker(capacity=4, content=[1, 3, 0, 2]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
+        
+............................................................
+
+        Beaker(capacity=4, content=[0, 0, 1, 2]),
+        Beaker(capacity=4, content=[3, 4, 4, 5]),
+        Beaker(capacity=4, content=[2, 3, 1, 2]),
+        Beaker(capacity=4, content=[0, 3, 4, 4]),
+        Beaker(capacity=4, content=[3, 0, 5, 1]),
+        Beaker(capacity=4, content=[5, 1, 5, 2]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
         
 """
