@@ -3,6 +3,16 @@ class Beaker:
         self.content = content if content else []
         self.capacity = capacity
 
+    def __eq__(self, other):
+        if isinstance(other, Beaker):
+            these_values = self.content, self.capacity
+            other_values = other.content, other.capacity
+            return these_values == other_values
+        return NotImplemented
+
+    def __str__(self):
+        return str(self.content)
+
     def add(self, liquid=None):
         if not liquid:
             print("No liquid provided")
@@ -45,6 +55,9 @@ class Beaker:
             self.add(remain)
         return True
 
+    def to_tuple(self):
+        return tuple(self.content)
+
 def check_game(game_state):
     """
     Checks if a game as reached a win state.
@@ -60,13 +73,18 @@ def check_game(game_state):
     return end_state
 
 def check_beaker(beaker):
-    completed = True
-    if not beaker.content: return completed
-    for i in range(len(beaker.content[1:])):
+    # if no liquid is complete
+    if not beaker.content: return True
+
+    units = len(beaker.content)
+    # if not full not complete
+    if units != beaker.capacity: return False
+    for i in range(1, ):
+        # if different liquids not complete
         if beaker.content[i] != beaker.content[i-1]:
-            completed = False
-            break
-    return completed
+            return False
+
+    return True
 
 def check_action(game_state, action):
     """
@@ -79,8 +97,18 @@ def check_action(game_state, action):
     to_beaker = game_state[action[1]]
 
     if ((not from_beaker.content) or
-            (len(to_beaker + from_beaker) > to_beaker.capacity) or
             (to_beaker.content and from_beaker.content[-1] != to_beaker.content[-1])):
+        return False
+
+    top_liq = from_beaker.content[-1]
+    counter = 0
+    for e in reversed(list(from_beaker.content)):
+        if top_liq == e:
+            counter += 1
+        else:
+            break
+
+    if len(to_beaker.content) + counter > to_beaker.capacity:
         return False
 
     return True

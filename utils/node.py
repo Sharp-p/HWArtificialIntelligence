@@ -1,4 +1,4 @@
-from liquid_sort_game import check_action
+from utils.liquid_sort_game import check_action
 import copy
 
 class Node:
@@ -7,7 +7,13 @@ class Node:
         self.parent = parent
         self.action = action
         self.cost = cost if cost is not None else self.parent.cost + 1 # each move in the game has unitary cost
-        self.eval = # TODO: add evaluation of node UPDATE a_star.py
+        self.eval = self.cost + self.heuristic()
+
+    def __lt__(self, other):
+        return self.cost < other.cost
+
+    def __str__(self):
+        return str([str(beaker) for beaker in self.state])
 
     def heuristic(self):
         color_distribution = {} # numer of beakers a color has been found in for each color
@@ -57,7 +63,7 @@ class Node:
         Generate every legal action in the current state
         :return: A list of actions
         """
-        actions = [] # Ma che cazzp hp fatto non esiste .beaker state è una lista
+        actions = []
         for i in range(len(self.state) - 1):
             for j in range(i + 1, len(self.state)):
                 if check_action(self.state, (i, j)):
@@ -66,8 +72,4 @@ class Node:
                     actions.append((j, i))
 
         return actions
-
-    def check_duplicate(self, frontier):
-
-        for priority, node in frontier.items():
 
