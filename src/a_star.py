@@ -42,15 +42,9 @@ def handle_duplicates(new, frontier) -> None:
 
 if __name__ == '__main__':
     initial_state = [
-        Beaker(capacity=4, content=[0, 0, 1, 2]),
-        Beaker(capacity=4, content=[3, 2, 4, 5]),
-        Beaker(capacity=4, content=[0, 5, 6, 6]),
-        Beaker(capacity=4, content=[5, 6, 0, 4]),
-        Beaker(capacity=4, content=[1, 3, 6, 3]),
-        Beaker(capacity=4, content=[5, 1, 1, 3]),
-        Beaker(capacity=4, content=[2, 2, 4, 4]),
-        Beaker(capacity=4, content=[]),
-        Beaker(capacity=4, content=[])
+        Beaker(capacity=2, content=[0, 1]),
+        Beaker(capacity=2, content=[1, 0]),
+        Beaker(capacity=2, content=[])
     ]
 
     solution = a_star(initial_state)
