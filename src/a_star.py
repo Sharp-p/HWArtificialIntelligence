@@ -1,18 +1,34 @@
 import heapq
+import time
+
 from utils.node import Node
 from utils.liquid_sort_game import Beaker, check_game
 
 
 def a_star(problem):
+    metrics = {
+        'time': 0.0,
+        'expanded': 0,
+        'generated': 0,
+        'cost': 0,
+        'solved': False
+    }
     node = Node(problem, None, None, 0)
     frontier = []
     heapq.heappush(frontier, (node.cost + node.heuristic(), node)) # holds generated but not explored nodes
     explored = set() # holds explored state
+    start = time.time()
     while frontier:
         # get the node with the highest priority (lowest eval)
         f_cur, current = heapq.heappop(frontier)
         # check if node.state is a solution
-        if check_game(current.state): return current.generate_solution()
+        if check_game(current.state):
+            metrics['time'] = time.time() - start
+            metrics['expanded'] = len(explored)
+            metrics['generated'] = len(frontier)
+            metrics['cost'] = current.cost
+            metrics['solved'] = True
+            return current.generate_solution(), metrics
 
         explored.add(tuple(beaker.to_tuple() for beaker in current.state))
         for a in current.generate_actions():
@@ -23,7 +39,7 @@ def a_star(problem):
                 heapq.heappush(frontier, (new.eval, new))
             else:
                 handle_duplicates(new, frontier)
-    return False
+    return False, metrics
 
 def handle_duplicates(new, frontier) -> None:
     """
@@ -42,9 +58,13 @@ def handle_duplicates(new, frontier) -> None:
 
 if __name__ == '__main__':
     initial_state = [
-        Beaker(capacity=2, content=[0, 1]),
-        Beaker(capacity=2, content=[1, 0]),
-        Beaker(capacity=2, content=[])
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[1, 0, 4, 1]),
+        Beaker(capacity=4, content=[0, 3, 0, 2]),
+        Beaker(capacity=4, content=[4, 3, 1, 4]),
+        Beaker(capacity=4, content=[2, 4, 3, 2]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[])
     ]
 
     solution = a_star(initial_state)
