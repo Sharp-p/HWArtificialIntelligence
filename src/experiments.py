@@ -11,44 +11,96 @@ if __name__ == "__main__":
         {
             "name": "EASY_1",
             "state": [
-                Beaker(2, [0, 1]), Beaker(2, [1, 0]), Beaker(2, [])
+                Beaker(capacity=4, content=[0, 0, 0]),
+                Beaker(capacity=4, content=[0]),
+            ]
+        },
+        {
+            "name": "EASY_2",
+            "state": [
+                Beaker(capacity=2, content=[0, 1]),
+                Beaker(capacity=2, content=[1, 0]),
+                Beaker(capacity=2, content=[])
+            ]
+        },
+        {
+            "name": "EASY_3",
+            "state": [
+                Beaker(capacity=4, content=[0, 0]),
+                Beaker(capacity=4, content=[1, 1, 1]),
+                Beaker(capacity=4, content=[0, 0, 1]),
+            ]
+        },
+        {
+            "name": "EASY_4",
+            "state": [
+                Beaker(capacity=4, content=[0, 1, 2, 3]),
+                Beaker(capacity=4, content=[3, 0, 1, 2]),
+                Beaker(capacity=4, content=[2, 3, 0, 1]),
+                Beaker(capacity=4, content=[1, 2, 3, 0]),
+                Beaker(capacity=4, content=[]),
+                Beaker(capacity=4, content=[])
             ]
         },
         {
             "name": "DOABLE_1",
             "state": [
-                Beaker(4, [0, 1, 1, 0]), Beaker(4, [2, 2, 1, 3]),
-                Beaker(4, [4, 1, 0, 3]), Beaker(4, [2, 5, 4, 4]),
-                Beaker(4, [5, 3, 4, 3]), Beaker(4, [0, 2, 5, 5]),
-                Beaker(4, []), Beaker(4, [])
+                Beaker(capacity=4, content=[0, 1, 1, 0]),
+                Beaker(capacity=4, content=[2, 3, 3, 2]),
+                Beaker(capacity=4, content=[2, 1, 3, 0]),
+                Beaker(capacity=4, content=[3, 1, 2, 0]),
+                Beaker(capacity=4, content=[]),
+                Beaker(capacity=4, content=[]),
             ]
         },
         {
             "name": "DOABLE_2",
             "state": [
-                Beaker(4, [0, 0, 1, 2]), Beaker(4, [3, 2, 4, 5]),
-                Beaker(4, [0, 5, 6, 6]), Beaker(4, [5, 6, 0, 4]),
-                Beaker(4, [1, 3, 6, 3]), Beaker(4, [5, 1, 1, 3]),
-                Beaker(4, [2, 2, 4, 4]), Beaker(4, []), Beaker(4, [])
+                Beaker(capacity=4, content=[0, 0, 1, 2]),
+                Beaker(capacity=4, content=[0, 3, 1, 2]),
+                Beaker(capacity=4, content=[3, 2, 3, 1]),
+                Beaker(capacity=4, content=[2, 3, 1, 0]),
+                Beaker(capacity=4, content=[]),
+                Beaker(capacity=4, content=[]),
             ]
         },
         {
-            "name": "EXPLODES_1",
+            "name": "DOABLE_3",
             "state": [
-                Beaker(4, [0, 1, 2, 3]), Beaker(4, [1, 0, 4, 1]),
-                Beaker(4, [0, 3, 0, 2]), Beaker(4, [4, 3, 1, 4]),
-                Beaker(4, [2, 4, 3, 2]), Beaker(4, []), Beaker(4, [])
+                Beaker(capacity=4, content=[0, 1, 2, 2]),
+                Beaker(capacity=4, content=[2, 3, 4, 1]),
+                Beaker(capacity=4, content=[4, 0, 2, 0]),
+                Beaker(capacity=4, content=[3, 4, 1, 0]),
+                Beaker(capacity=4, content=[3, 1, 3, 4]),
+                Beaker(capacity=4, content=[]),
+                Beaker(capacity=4, content=[]),
             ]
         },
         {
-            "name": "EXPLODES_2",
+            "name": "DOABLE_4",
             "state": [
-                Beaker(4, [0, 1, 2, 3]), Beaker(4, [0, 2, 4, 2]),
-                Beaker(4, [1, 5, 5, 4]), Beaker(4, [0, 1, 3, 4]),
-                Beaker(4, [4, 3, 5, 5]), Beaker(4, [1, 3, 0, 2]),
-                Beaker(4, []), Beaker(4, [])
+                Beaker(capacity=4, content=[0, 1, 2, 3]),
+                Beaker(capacity=4, content=[1, 3, 0, 4]),
+                Beaker(capacity=4, content=[3, 0, 2, 2]),
+                Beaker(capacity=4, content=[3, 4, 1, 4]),
+                Beaker(capacity=4, content=[0, 1, 4, 2]),
+                Beaker(capacity=4, content=[]),
+                Beaker(capacity=4, content=[]),
             ]
-        }
+        },
+        {
+            "name": "DOABLE_5",
+            "state": [
+                Beaker(capacity=4, content=[0, 1, 2, 3]),
+                Beaker(capacity=4, content=[1, 0, 4, 1]),
+                Beaker(capacity=4, content=[0, 3, 0, 2]),
+                Beaker(capacity=4, content=[4, 3, 1, 4]),
+                Beaker(capacity=4, content=[2, 4, 3, 2]),
+                Beaker(capacity=4, content=[]),
+                Beaker(capacity=4, content=[]),
+            ]
+        },
+
     ]
 
     data_records = []
@@ -124,6 +176,5 @@ if __name__ == "__main__":
     df.to_csv(csv_filename, index=False)
     print(f"\nResults saved to {csv_filename}")
 
-    # Stampa un piccolo riassunto finale
     print("\n--- SUMMARY ---")
     print(df.groupby(["Algorithm"])[["Time", "Expanded"]].mean())

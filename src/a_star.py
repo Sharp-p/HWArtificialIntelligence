@@ -33,7 +33,8 @@ def a_star(problem):
         explored.add(tuple(beaker.to_tuple() for beaker in current.state))
         for a in current.generate_actions():
             new = Node(current.generate_state(a), current, a)
-            print("New state generated:", new)
+            # remove comment to see generated state (and the heuretic of that state that lets you see the progress)
+            # print("New state generated:", new)
             if (tuple(beaker.to_tuple() for beaker in new.state) not in explored
                     and new.state not in [couple[1].state for couple in frontier]):
                 heapq.heappush(frontier, (new.eval, new))
@@ -58,11 +59,12 @@ def handle_duplicates(new, frontier) -> None:
 
 if __name__ == '__main__':
     initial_state = [
-        Beaker(capacity=4, content=[0, 1, 2, 3]),
-        Beaker(capacity=4, content=[1, 0, 4, 1]),
-        Beaker(capacity=4, content=[0, 3, 0, 2]),
-        Beaker(capacity=4, content=[4, 3, 1, 4]),
-        Beaker(capacity=4, content=[2, 4, 3, 2]),
+        Beaker(capacity=4, content=[0, 1, 1, 0]),
+        Beaker(capacity=4, content=[2, 2, 1, 3]),
+        Beaker(capacity=4, content=[4, 1, 0, 3]),
+        Beaker(capacity=4, content=[2, 5, 4, 4]),
+        Beaker(capacity=4, content=[5, 3, 4, 3]),
+        Beaker(capacity=4, content=[0, 2, 5, 5]),
         Beaker(capacity=4, content=[]),
         Beaker(capacity=4, content=[])
     ]
@@ -88,8 +90,83 @@ if __name__ == '__main__':
         Beaker(capacity=4, content=[]),
         Beaker(capacity=4, content=[])
         
+........................................................................
+        
+        Beaker(capacity=4, content=[0, 0, 0]),
+        Beaker(capacity=4, content=[0]),
+
+........................................................................
+
+        Beaker(capacity=4, content=[0, 0]),
+        Beaker(capacity=4, content=[1, 1, 1]),
+        Beaker(capacity=4, content=[0, 0, 1]),        
+        
+........................................................................
+        
+        Beaker(capacity=4, content=[0, 0, 0, 1]),
+        Beaker(capacity=4, content=[2, 2, 1, 1]),
+        Beaker(capacity=4, content=[2, 2, 1, 0]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+
+........................................................................        
+        
+        Beaker(capacity=4, content=[0, 0, 1, 2]),
+        Beaker(capacity=4, content=[1, 1, 0, 2]),
+        Beaker(capacity=4, content=[2, 0, 1, 2]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+        
 ============= DOABLE STARTING STATES ======================================
         
+        Beaker(capacity=4, content=[0, 1, 1, 0]),
+        Beaker(capacity=4, content=[2, 3, 3, 2]),
+        Beaker(capacity=4, content=[2, 1, 3, 0]),
+        Beaker(capacity=4, content=[3, 1, 2, 0]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+        
+........................................................................        
+
+        Beaker(capacity=4, content=[0, 0, 1, 2]),
+        Beaker(capacity=4, content=[0, 3, 1, 2]),
+        Beaker(capacity=4, content=[3, 2, 3, 1]),
+        Beaker(capacity=4, content=[2, 3, 1, 0]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+        
+........................................................................        
+
+        Beaker(capacity=4, content=[0, 1, 2, 2]),
+        Beaker(capacity=4, content=[2, 3, 4, 1]),
+        Beaker(capacity=4, content=[4, 0, 2, 0]),
+        Beaker(capacity=4, content=[3, 4, 1, 0]),
+        Beaker(capacity=4, content=[3, 1, 3, 4]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+        
+........................................................................        
+
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[1, 3, 0, 4]),
+        Beaker(capacity=4, content=[3, 0, 2, 2]),
+        Beaker(capacity=4, content=[3, 4, 1, 4]),
+        Beaker(capacity=4, content=[0, 1, 4, 2]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+        
+........................................................................        
+
+        Beaker(capacity=4, content=[0, 1, 2, 3]),
+        Beaker(capacity=4, content=[1, 0, 4, 1]),
+        Beaker(capacity=4, content=[0, 3, 0, 2]),
+        Beaker(capacity=4, content=[4, 3, 1, 4]),
+        Beaker(capacity=4, content=[2, 4, 3, 2]),
+        Beaker(capacity=4, content=[]),
+        Beaker(capacity=4, content=[]),
+        
+=========== NOT DOABLE ==========
+
         Beaker(capacity=4, content=[0, 1, 1, 0]),
         Beaker(capacity=4, content=[2, 2, 1, 3]),
         Beaker(capacity=4, content=[4, 1, 0, 3]),
